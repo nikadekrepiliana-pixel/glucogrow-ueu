@@ -9,19 +9,19 @@ import {
   Check, 
   AlertCircle
 } from 'lucide-react';
-import { Navbar } from './components/Navbar';
-import { HeroSection } from './components/HeroSection';
-import { GrowthCalculator } from './components/GrowthCalculator';
-import { GrowthChart } from './components/GrowthChart';
-import { NutritionMenuGenerator } from './components/NutritionMenuGenerator';
-import { EducationSection } from './components/EducationSection';
-import { PatientTable } from './components/PatientTable';
-import { AiChatbotDrawer } from './components/AiChatbotDrawer';
-import { LoginModal } from './components/LoginModal';
-import { INITIAL_CHILDREN } from './data/mockData';
-import { ChildRecord, AiStatus } from './types';
+import { Navbar } from './Navbar';
+import { HeroSection } from './HeroSection';
+import { GrowthCalculator } from './GrowthCalculator';
+import { GrowthChart } from './GrowthChart';
+import { NutritionMenuGenerator } from './NutritionMenuGenerator';
+import { EducationSection } from './EducationSection';
+import { PatientTable } from './PatientTable';
+import { AiChatbotDrawer } from './AiChatbotDrawer';
+import { LoginModal } from './LoginModal';
+import { INITIAL_CHILDREN } from '../data/mockData';
+import { ChildRecord, AiStatus } from '../types';
 
-export default function App() {
+export default function GlucoGrowApp() {
   const [activeTab, setActiveTab] = useState<'home' | 'calculator' | 'nutrition' | 'education' | 'dashboard'>('home');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState<'parent' | 'cadre' | 'guest'>('guest');
