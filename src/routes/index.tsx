@@ -22,5 +22,21 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: GlucoGrowApp,
+  component: GlucoGrowPage,
 });
+
+function GlucoGrowPage() {
+  return (
+    <iframe
+      src="/glucogrow/index.html"
+      title="GlucoGrow"
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        border: "none",
+      }}
+    />
+  );
+}
