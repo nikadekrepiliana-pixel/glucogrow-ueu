@@ -1,24 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+import GlucoGrowApp from "@/components/GlucoGrowApp";
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "GlucoGrow — Platform Nutrisi Cerdas & Cegah Stunting Balita" },
+      {
+        name: "description",
+        content:
+          "Pantau tumbuh kembang balita sesuai standar WHO, susun menu MPASI padat gizi, dan konsultasi dengan asisten AI GlucoBot (Gemini & GPT).",
+      },
+      {
+        property: "og:title",
+        content: "GlucoGrow — Platform Nutrisi Cerdas & Cegah Stunting Balita",
+      },
+      {
+        property: "og:description",
+        content:
+          "Kalkulator antropometri, kurva pertumbuhan WHO, generator menu MPASI, dan asisten AI nutrisi balita dalam satu platform.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: GlucoGrowApp,
+});
