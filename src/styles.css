@@ -142,3 +142,7 @@
     color: var(--color-foreground);
   }
 }
+
+@theme inline {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
