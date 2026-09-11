@@ -39,29 +39,33 @@ export default function GlucoGrowApp() {
   });
 
   // Dark Mode State
-  const [darkMode, setDarkMode] = useState<boolean>(() => {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   // Patient / Children State
-  const [childrenList, setChildrenList] = useState<ChildRecord[]>(() => {
+  const [childrenList, setChildrenList] = useState<ChildRecord[]>(INITIAL_CHILDREN);
+  const [hydrated, setHydrated] = useState(false);
+
+  // Load persisted state after hydration (browser only)
+  useEffect(() => {
     try {
       const saved = localStorage.getItem('glucogrow_children');
-      if (saved) return JSON.parse(saved);
+      if (saved) setChildrenList(JSON.parse(saved));
     } catch (e) {
       console.warn('LocalStorage load error:', e);
     }
-    return INITIAL_CHILDREN;
-  });
+    setDarkMode(window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false);
+    setHydrated(true);
+  }, []);
 
   // Persist children records
   useEffect(() => {
+    if (!hydrated) return;
     try {
       localStorage.setItem('glucogrow_children', JSON.stringify(childrenList));
     } catch (e) {
       console.warn('LocalStorage save error:', e);
     }
-  }, [childrenList]);
+  }, [childrenList, hydrated]);
 
   // Sync Dark Mode class on <html>
   useEffect(() => {
