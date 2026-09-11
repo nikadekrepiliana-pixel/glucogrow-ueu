@@ -75,11 +75,13 @@
 
         /* --- NAVIGATION --- */
         nav { background: var(--glass); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; padding: 16px 0; border-bottom: 1px solid var(--border); }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
         .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
         .nav-links { display: flex; gap: 32px; align-items: center; }
         .nav-links a { font-weight: 500; font-size: 14px; transition: color 0.3s; }
         .nav-links a:hover { color: var(--primary); }
+        .nav-logos { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+        .nav-logos img { height: 44px; width: auto; object-fit: contain; }
 
         /* --- HERO SECTION --- */
         .hero { padding: 80px 20px; display: flex; align-items: center; min-height: 85vh; position: relative; background: linear-gradient(135deg, var(--bg-body) 0%, #eef6f5 100%); overflow: hidden; }
