@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import GlucoGrowApp from "@/components/GlucoGrowApp";
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
