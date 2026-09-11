@@ -103,7 +103,7 @@ export const GrowthCalculator: React.FC<GrowthCalculatorProps> = ({
     const newRecord: ChildRecord = {
       id: Date.now(),
       name: childName.trim() || 'Balita Baru',
-      dob: new Date(Date.now() - (Number(ageMonths || 0) * 30.4 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0],
+      dob: new Date(Date.now() - (Number(ageMonths || 0) * 30.4 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0] as string,
       age: Number(ageMonths || 0),
       gender: gender,
       height: Number(height || 0),
@@ -112,7 +112,7 @@ export const GrowthCalculator: React.FC<GrowthCalculatorProps> = ({
       notes: `Kalkulasi Z-Score: TB/U ${zHeight} SD, BB/U ${zWeight} SD.`,
       history: [
         {
-          date: new Date().toISOString().split('T')[0],
+          date: new Date().toISOString().split('T')[0] as string,
           age: Number(ageMonths || 0),
           h: Number(height || 0),
           w: Number(weight || 0),

@@ -80,7 +80,7 @@ export const PatientTable: React.FC<PatientTableProps> = ({
       notes: newNotes.trim() || 'Pemeriksaan rutin Posyandu.',
       history: [
         {
-          date: new Date().toISOString().split('T')[0],
+          date: new Date().toISOString().split('T')[0] as string,
           age: months,
           h: Number(newHeight),
           w: Number(newWeight),

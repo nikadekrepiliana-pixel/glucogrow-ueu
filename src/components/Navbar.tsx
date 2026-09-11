@@ -16,7 +16,7 @@ import { AiStatus } from '../types';
 
 interface NavbarProps {
   activeTab: string;
-  setActiveTab: (tab: string) => void;
+  setActiveTab: (tab: 'home' | 'calculator' | 'nutrition' | 'education' | 'dashboard') => void;
   isLoggedIn: boolean;
   userRole: 'parent' | 'cadre' | 'guest';
   onOpenLogin: () => void;
