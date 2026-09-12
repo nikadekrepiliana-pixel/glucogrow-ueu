@@ -14,16 +14,225 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      children: {
+        Row: {
+          birth_place: string | null
+          created_at: string
+          created_by: string | null
+          dob: string
+          gender: string
+          id: string
+          name: string
+          nik: string | null
+          notes: string | null
+          parent_name: string | null
+          parent_phone: string | null
+          parent_user_id: string | null
+        }
+        Insert: {
+          birth_place?: string | null
+          created_at?: string
+          created_by?: string | null
+          dob: string
+          gender?: string
+          id?: string
+          name: string
+          nik?: string | null
+          notes?: string | null
+          parent_name?: string | null
+          parent_phone?: string | null
+          parent_user_id?: string | null
+        }
+        Update: {
+          birth_place?: string | null
+          created_at?: string
+          created_by?: string | null
+          dob?: string
+          gender?: string
+          id?: string
+          name?: string
+          nik?: string | null
+          notes?: string | null
+          parent_name?: string | null
+          parent_phone?: string | null
+          parent_user_id?: string | null
+        }
+        Relationships: []
+      }
+      immunizations: {
+        Row: {
+          child_id: string
+          created_at: string
+          created_by: string | null
+          dose_number: number
+          given_date: string
+          id: string
+          notes: string | null
+          vaccine_name: string
+          visit_id: string | null
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          created_by?: string | null
+          dose_number?: number
+          given_date?: string
+          id?: string
+          notes?: string | null
+          vaccine_name: string
+          visit_id?: string | null
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          created_by?: string | null
+          dose_number?: number
+          given_date?: string
+          id?: string
+          notes?: string | null
+          vaccine_name?: string
+          visit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "immunizations_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "immunizations_visit_id_fkey"
+            columns: ["visit_id"]
+            isOneToOne: false
+            referencedRelation: "visits"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          is_active: boolean
+          phone: string | null
+          username: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+          is_active?: boolean
+          phone?: string | null
+          username: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          is_active?: boolean
+          phone?: string | null
+          username?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      visits: {
+        Row: {
+          age_months: number | null
+          child_id: string
+          created_at: string
+          created_by: string | null
+          findings: string | null
+          head_circumference: number | null
+          height: number | null
+          id: string
+          notes: string | null
+          purpose: string
+          status: string | null
+          visit_date: string
+          visit_type: string
+          weight: number | null
+        }
+        Insert: {
+          age_months?: number | null
+          child_id: string
+          created_at?: string
+          created_by?: string | null
+          findings?: string | null
+          head_circumference?: number | null
+          height?: number | null
+          id?: string
+          notes?: string | null
+          purpose: string
+          status?: string | null
+          visit_date?: string
+          visit_type?: string
+          weight?: number | null
+        }
+        Update: {
+          age_months?: number | null
+          child_id?: string
+          created_at?: string
+          created_by?: string | null
+          findings?: string | null
+          head_circumference?: number | null
+          height?: number | null
+          id?: string
+          notes?: string | null
+          purpose?: string
+          status?: string | null
+          visit_date?: string
+          visit_type?: string
+          weight?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visits_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "super_admin" | "health_worker" | "parent"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +359,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["super_admin", "health_worker", "parent"],
+    },
   },
 } as const
