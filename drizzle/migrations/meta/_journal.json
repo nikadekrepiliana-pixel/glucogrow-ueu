@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789201732817,
+      "tag": "0000_glucogrow_core_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789201752840,
+      "tag": "0001_signup_role_hardening",
+      "breakpoints": true
+    }
+  ]
+}

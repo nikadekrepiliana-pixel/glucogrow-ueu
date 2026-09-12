@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiAdminRouteImport } from './routes/api/admin'
 import { Route as ApiAiRouteImport } from './routes/api/ai'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminRoute = ApiAdminRouteImport.update({
+  id: '/api/admin',
+  path: '/api/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAiRoute = ApiAiRouteImport.update({
@@ -31,30 +37,34 @@ const ApiHealthRoute = ApiHealthRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/admin': typeof ApiAdminRoute
   '/api/ai': typeof ApiAiRoute
   '/api/health': typeof ApiHealthRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/admin': typeof ApiAdminRoute
   '/api/ai': typeof ApiAiRoute
   '/api/health': typeof ApiHealthRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/admin': typeof ApiAdminRoute
   '/api/ai': typeof ApiAiRoute
   '/api/health': typeof ApiHealthRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/ai' | '/api/health'
+  fullPaths: '/' | '/api/admin' | '/api/ai' | '/api/health'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/ai' | '/api/health'
-  id: '__root__' | '/' | '/api/ai' | '/api/health'
+  to: '/' | '/api/admin' | '/api/ai' | '/api/health'
+  id: '__root__' | '/' | '/api/admin' | '/api/ai' | '/api/health'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiAdminRoute: typeof ApiAdminRoute
   ApiAiRoute: typeof ApiAiRoute
   ApiHealthRoute: typeof ApiHealthRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin': {
+      id: '/api/admin'
+      path: '/api/admin'
+      fullPath: '/api/admin'
+      preLoaderRoute: typeof ApiAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/ai': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiAdminRoute: ApiAdminRoute,
   ApiAiRoute: ApiAiRoute,
   ApiHealthRoute: ApiHealthRoute,
 }
