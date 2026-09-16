@@ -35,6 +35,15 @@ const bodySchema = z.discriminatedUnion("action", [
     password: z.string().min(6).max(72),
   }),
   z.object({ action: z.literal("delete_user"), user_id: z.string().uuid() }),
+  z.object({
+    action: z.literal("create_parent_for_child"),
+    child_id: z.string().uuid(),
+    child_name: z.string().trim().min(1).max(120),
+    dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    parent_name: z.string().trim().max(120).optional(),
+    phone: z.string().trim().max(30).optional(),
+  }),
+
 ]);
 
 const EMAIL_DOMAIN = "glucogrow.local";
