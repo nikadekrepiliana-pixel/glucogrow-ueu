@@ -28,6 +28,7 @@ export type Database = {
           parent_name: string | null
           parent_phone: string | null
           parent_user_id: string | null
+          parent_username: string | null
         }
         Insert: {
           birth_place?: string | null
@@ -42,6 +43,7 @@ export type Database = {
           parent_name?: string | null
           parent_phone?: string | null
           parent_user_id?: string | null
+          parent_username?: string | null
         }
         Update: {
           birth_place?: string | null
@@ -56,6 +58,7 @@ export type Database = {
           parent_name?: string | null
           parent_phone?: string | null
           parent_user_id?: string | null
+          parent_username?: string | null
         }
         Relationships: []
       }
@@ -68,6 +71,7 @@ export type Database = {
           given_date: string
           id: string
           notes: string | null
+          officer_name: string | null
           vaccine_name: string
           visit_id: string | null
         }
@@ -79,6 +83,7 @@ export type Database = {
           given_date?: string
           id?: string
           notes?: string | null
+          officer_name?: string | null
           vaccine_name: string
           visit_id?: string | null
         }
@@ -90,6 +95,7 @@ export type Database = {
           given_date?: string
           id?: string
           notes?: string | null
+          officer_name?: string | null
           vaccine_name?: string
           visit_id?: string | null
         }
@@ -169,6 +175,7 @@ export type Database = {
           height: number | null
           id: string
           notes: string | null
+          officer_name: string | null
           purpose: string
           status: string | null
           visit_date: string
@@ -185,6 +192,7 @@ export type Database = {
           height?: number | null
           id?: string
           notes?: string | null
+          officer_name?: string | null
           purpose: string
           status?: string | null
           visit_date?: string
@@ -201,6 +209,7 @@ export type Database = {
           height?: number | null
           id?: string
           notes?: string | null
+          officer_name?: string | null
           purpose?: string
           status?: string | null
           visit_date?: string

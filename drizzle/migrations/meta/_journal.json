@@ -15,6 +15,13 @@
       "when": 1789201752840,
       "tag": "0001_signup_role_hardening",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789552670584,
+      "tag": "0002_add_visit_officer_name",
+      "breakpoints": true
     }
   ]
 }
