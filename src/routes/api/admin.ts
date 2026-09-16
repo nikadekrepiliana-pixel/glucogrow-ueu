@@ -85,7 +85,52 @@ export const Route = createFileRoute("/api/admin")({
           return json({ error: "Data permintaan tidak valid" }, 400);
         }
 
+        const staffAllowed = ["list_users", "create_staff", "reset_password", "create_parent_for_child"];
+        if (!isSuper && !staffAllowed.includes(body.action)) {
+          return json({ error: "Aksi ini tidak diizinkan" }, 403);
+        }
+
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+        if (body.action === "create_parent_for_child") {
+          const base =
+            body.child_name
+              .toLowerCase()
+              .normalize("NFKD")
+              .replace(/[^a-z0-9]+/g, ".")
+              .replace(/^\.+|\.+$/g, "")
+              .slice(0, 30) || "orangtua";
+          let username = base.length >= 3 ? base : `${base}.anak`;
+          for (let i = 0; i < 30; i++) {
+            const { data: existing } = await supabaseAdmin
+              .from("profiles")
+              .select("id")
+              .eq("username", username)
+              .maybeSingle();
+            if (!existing) break;
+            username = `${base}${i + 2}`;
+          }
+          const { data: created, error } = await supabaseAdmin.auth.admin.createUser({
+            email: `${username}@${EMAIL_DOMAIN}`,
+            password: body.dob,
+            email_confirm: true,
+            user_metadata: {
+              username,
+              full_name: body.parent_name ?? `Orang tua ${body.child_name}`,
+              phone: body.phone ?? null,
+            },
+          });
+          if (error || !created.user) {
+            return json({ error: error?.message ?? "Gagal membuat akun orang tua" }, 400);
+          }
+          const { error: linkErr } = await supabaseAdmin
+            .from("children")
+            .update({ parent_user_id: created.user.id, parent_username: username })
+            .eq("id", body.child_id);
+          if (linkErr) return json({ error: linkErr.message }, 400);
+          return json({ ok: true, username, password: body.dob });
+        }
+
 
         if (body.action === "list_users") {
           const { data: profiles, error } = await supabaseAdmin
