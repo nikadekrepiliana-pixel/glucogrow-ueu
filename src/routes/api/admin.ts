@@ -72,11 +72,15 @@ export const Route = createFileRoute("/api/admin")({
           _user_id: userData.user.id,
           _role: "super_admin",
         });
-        if (!isSuper) return json({ error: "Hanya Super Admin yang diizinkan" }, 403);
+        const { data: isStaff } = await asUser.rpc("is_staff", {
+          _user_id: userData.user.id,
+        });
+        if (!isStaff) return json({ error: "Hanya tenaga kesehatan yang diizinkan" }, 403);
 
         let body: z.infer<typeof bodySchema>;
         try {
           body = bodySchema.parse(await request.json());
+
         } catch {
           return json({ error: "Data permintaan tidak valid" }, 400);
         }
